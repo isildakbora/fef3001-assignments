@@ -257,7 +257,7 @@ footer{max-width:1180px;margin:0 auto;padding:24px 20px 48px;border-top:1px soli
 </footer>
 <script>
 // Set FORM to the Google Form link; the button turns into the submit link from the opening date on.
-const FORM = '';
+const FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSfaJhudZS__QOsXcQXZgo58w4Xvb8y2fQWv5e95LjOaKzLORw/viewform';
 const OPENS = new Date('2026-11-05T00:00:00+03:00');
 const b = document.getElementById('submit');
 if (FORM && new Date() >= OPENS) { b.href = FORM; b.removeAttribute('aria-disabled'); b.textContent = 'Submit your work'; }
