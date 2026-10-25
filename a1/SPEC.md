@@ -35,7 +35,7 @@ term, and return the periods (in **months**) of the `n` strongest peaks, stronge
 
 ---
 
-### Tests (`test_co2_analysis.py`, run with `python -m pytest -q`)
+### Tests (`test_co2_analysis.py`, written for pytest)
 Use **synthetic data with known answers** only — no network access in the tests. At minimum:
 
 - `fit_poly` recovers the coefficients of an exact quadratic (to 1e-8) and returns `rms ≈ 0`;
@@ -44,3 +44,6 @@ Use **synthetic data with known answers** only — no network access in the test
 - `dominant_periods` returns 12.0 first for a 12-month sine.
 
 You must add **one more test yourself**, by hand, that the agent did not write.
+
+The tests run in the Colab notebook (Part B). If Python is installed on your computer, the agent can also run
+them for you in Antigravity; approve the command when it asks.
