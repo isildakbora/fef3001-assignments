@@ -73,6 +73,7 @@ p,ol,ul{margin:0 0 .9em} ol,ul{padding-left:1.25em} li{margin:.35em 0}
 code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.84em;background:#f1f2f5;padding:.05em .3em;border-radius:2px}
 .steps figure{margin:.7em 0 1.1em} .steps img{display:block;max-width:100%;height:auto;border:1px solid var(--grid);border-radius:3px}
 .steps figure.narrow img{max-width:min(360px,100%)}
+figure.shot{margin:.7em 0 1.1em} figure.shot img{display:block;max-width:min(600px,100%);height:auto;border:1px solid var(--grid);border-radius:3px}
 figcaption{font-size:15px;color:var(--graphite);margin-top:.35em}
 .credit{font-size:15px;color:var(--graphite)}
 pre{font:15px/1.5 ui-monospace,Menlo,Consolas,monospace;background:#f1f2f5;padding:10px 14px;margin:.4em 0 .9em;overflow-x:auto}
@@ -200,7 +201,10 @@ footer{max-width:1180px;margin:0 auto;padding:24px 20px 48px;border-top:1px soli
         <dt>Q4</dt><dd>Find the strongest periods in what is left after the trend, and say which one your model created.</dd><dd class="p">10</dd>
         <dt>Q5</dt><dd>Derive, by hand, how many gigatonnes of carbon one ppm of CO₂ is.</dd><dd class="p">10</dd>
       </dl>
-      <p>When you finish, share the notebook so that anyone with the link can view it, and copy the link.</p>
+      <p>When you finish, do two things. Share the notebook so that anyone with the link can view it, and copy the link. Then
+      save the notebook as a Python file: <b>File → Download → Download .py</b>. Colab saves a <code>.py</code> file named after your notebook to your computer.</p>
+      <figure class="shot"><img src="img/colab-download-py.png" width="600" height="490" alt="Colab's File menu open at Download, with Download .ipynb and Download .py" loading="lazy">
+      <figcaption>Colab, File → Download → Download .py.</figcaption></figure>
     </div>
   </section>
 
@@ -221,7 +225,7 @@ footer{max-width:1180px;margin:0 auto;padding:24px 20px 48px;border-top:1px soli
       upload files, and lets you change your submission until the deadline. Have these ready:</p>
       <ul>
         <li>the link to your Colab notebook, with view access;</li>
-        <li><code>co2_analysis.py</code> and <code>test_co2_analysis.py</code>;</li>
+        <li><code>co2_analysis.py</code> and <code>test_co2_analysis.py</code>, and your notebook as a <code>.py</code> file;</li>
         <li>the two screenshots from Part A: the plan with your comment, and the walkthrough.</li>
       </ul>
     </div>
