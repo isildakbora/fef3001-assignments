@@ -3,26 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FEF3001 Assignments</title>
+<title>FEF3001 assignments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@87.5,500;87.5,700&family=Spectral:wght@400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f6f5f1;--panel:#fff;--ink:#1c2233;--soft:#4b5366;--rule:#dcd8cc;--brand:#222b57;--gold:#a8884f}
-@media (prefers-color-scheme:dark){:root{--bg:#0f131d;--panel:#161c2a;--ink:#e8eaf0;--soft:#b4bacb;--rule:#2b3245;--brand:#9fb0e8;--gold:#cdb482}}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-main{max-width:760px;margin:0 auto;padding:32px 16px 64px}
-.kicker{font:600 13px/1.4 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
-h1{font-size:clamp(28px,5vw,40px);line-height:1.1;margin:.3em 0 .6em}
-a.item{display:block;text-decoration:none;color:inherit;background:var(--panel);border:1px solid var(--rule);border-left:3px solid var(--gold);border-radius:6px;padding:14px 16px;margin:12px 0}
-a.item b{color:var(--brand);font-size:18px} a.item span{display:block;color:var(--soft);font-size:15px}
-footer{margin-top:40px;font-size:14px;color:var(--soft)}
+:root{--paper:#ffffff;--ink:#16181d;--graphite:#5a6070;--red:#c4262e;--grid:#e3e5ea}
+body{margin:0;background:var(--paper);color:var(--ink);font:19px/1.62 'Spectral',Georgia,serif}
+main{max-width:46em;margin:0 auto;padding:56px 20px 80px}
+h1{font:700 clamp(34px,5vw,52px)/1 'Archivo','Arial Narrow',sans-serif;font-stretch:87.5%;margin:0 0 .3em}
+p{margin:0 0 1.6em;color:var(--graphite)}
+ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--grid)}
+li{padding:20px 0;border-bottom:1px solid var(--grid)}
+li a{font:700 24px/1.2 'Archivo','Arial Narrow',sans-serif;font-stretch:87.5%;color:var(--ink);text-decoration:none}
+li a:hover{color:var(--red)}
+li span{display:block;margin-top:4px;color:var(--graphite)}
+a:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+sub{font-size:.55em;line-height:0;vertical-align:-.12em}
+footer{margin-top:40px;font-size:16px;color:var(--graphite)}
 </style>
 </head>
 <body>
 <main>
-  <div class="kicker">FEF3001 · Introduction to Artificial Intelligence · Fall 2026</div>
-  <h1>Assignments</h1>
-  <a class="item" href="a1/"><b>Assignment 1 · Is the rise of CO₂ accelerating?</b>
-    <span>Google Antigravity + Google Colab · individual · out 5 Nov, due 12 Nov 2026, 14:00</span></a>
-  <footer>Prof. Dr. Bora Işıldak · Yıldız Technical University</footer>
+  <h1>FEF3001 assignments</h1>
+  <p>Introduction to Artificial Intelligence, Yıldız Technical University, fall 2026.</p>
+  <ol>
+    <li><a href="a1/">Assignment 1: Is the rise of CO<sub>2</sub> accelerating?</a>
+      <span>Google Antigravity and Google Colab. Handed out 5 November, due 12 November 2026 at 14:00.</span></li>
+  </ol>
+  <footer>Prof. Dr. Bora Işıldak</footer>
 </main>
 </body>
 </html>
