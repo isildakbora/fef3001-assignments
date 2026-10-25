@@ -71,6 +71,10 @@ tr.a td:last-child{color:var(--a)} tr.b td:last-child{color:var(--b)} tr.c td:la
 h2{font:700 30px/1.15 var(--head);font-stretch:87.5%;margin:0 0 .5em}
 p,ol,ul{margin:0 0 .9em} ol,ul{padding-left:1.25em} li{margin:.35em 0}
 code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.84em;background:#f1f2f5;padding:.05em .3em;border-radius:2px}
+.steps figure{margin:.7em 0 1.1em} .steps img{display:block;max-width:100%;height:auto;border:1px solid var(--grid);border-radius:3px}
+.steps figure.narrow img{max-width:min(360px,100%)}
+figcaption{font-size:15px;color:var(--graphite);margin-top:.35em}
+.credit{font-size:15px;color:var(--graphite)}
 pre{font:15px/1.5 ui-monospace,Menlo,Consolas,monospace;background:#f1f2f5;padding:10px 14px;margin:.4em 0 .9em;overflow-x:auto}
 .q{display:grid;grid-template-columns:2.6em minmax(0,1fr) auto;gap:2px 10px;margin:0 0 .9em;padding:0}
 .q dt{font:700 17px/1.62 var(--head);font-stretch:87.5%}
@@ -154,17 +158,30 @@ footer{max-width:1180px;margin:0 auto;padding:24px 20px 48px;border-top:1px soli
     <div class="note"><span class="part">A</span>Antigravity<span class="pts">30 points</span></div>
     <div>
       <h2>An agent writes the code, you review it</h2>
-      <ol>
-        <li>Make an empty folder called <code>fef3001-a1</code>, open it in Antigravity, and save
-          <a href="https://github.com/isildakbora/fef3001-assignments/blob/main/a1/SPEC.md">SPEC.md</a> into it.</li>
-        <li>In the agent settings, set the review policy so that the agent asks for your review before it acts.</li>
-        <li>Ask the agent, in your own words, to write <code>co2_analysis.py</code> and <code>test_co2_analysis.py</code> exactly as SPEC.md describes.</li>
-        <li>Read its implementation plan before you approve it, and leave at least one real comment on it: a question or a correction, not “looks good”.</li>
-        <li>Ask the agent to run the tests. It asks before it runs anything: approve it, and read what it reports. If it says
-          Python is missing on your computer, go on; the tests also run in Colab.</li>
-        <li>Open <code>test_co2_analysis.py</code> in the editor and write one more test yourself, without the agent.</li>
-        <li>Take screenshots of the plan with your comment and of the agent's walkthrough.</li>
+      <ol class="steps">
+        <li>Make an empty folder called <code>fef3001-a1</code> on your computer and save
+          <a href="https://github.com/isildakbora/fef3001-assignments/blob/main/a1/SPEC.md">SPEC.md</a> into it.
+          In Antigravity, create a new project from that folder.
+          <figure><img src="img/ag-new-project.png" width="566" height="246" alt="Antigravity's project menu with the options New Project and Quick Start" loading="lazy">
+          <figcaption>New Project, in the Projects list on the left.</figcaption></figure></li>
+        <li>Open the project's settings and set <b>Artifact Review Policy</b> so that the agent always asks you to review its
+          documents before it acts. You are the reviewer: nothing is built without your approval.
+          <figure><img src="img/ag-project-settings.png" width="920" height="630" alt="Project settings with Security Preset and Artifact Review Policy" loading="lazy">
+          <figcaption>Project settings. Change Artifact Review Policy from its default.</figcaption></figure></li>
+        <li>Start a conversation in the project. Type <code>/plan</code> so that the agent writes a plan first, then ask, in your own
+          words, for <code>co2_analysis.py</code> and <code>test_co2_analysis.py</code> exactly as SPEC.md describes.
+          <figure><img src="img/ag-chat.png" width="1200" height="1043" alt="Antigravity's conversation box inside a project, with the model selector" loading="lazy">
+          <figcaption>The conversation box of a project. Type <code>/</code> to see the commands.</figcaption></figure></li>
+        <li>Read the implementation plan before you approve it. Leave at least one real comment on it: a question or a correction,
+          not “looks good”. See how the agent changes the plan.</li>
+        <li>Approve the plan. Let the agent write the files and run its tests; it asks before it runs anything, so read what it
+          wants to do and approve it. If it reports that Python is missing on your computer, go on: the tests also run in Colab.</li>
+        <li>Open the <b>Walkthrough</b> from the list of artifacts and read what the agent says it did. Take two screenshots: the plan
+          with your comment, and the walkthrough.
+          <figure class="narrow"><img src="img/ag-artifacts.png" width="694" height="157" alt="The Artifacts list with Walkthrough and Implementation Plan" loading="lazy">
+          <figcaption>The artifacts of a conversation: the plan, and the walkthrough at the end.</figcaption></figure></li>
       </ol>
+      <p class="credit">Screenshots: Google, <a href="https://codelabs.developers.google.com/getting-started-google-antigravity"><i>Getting Started with Google Antigravity</i></a>, CC BY 4.0; cropped. Your screens may look slightly different.</p>
     </div>
   </section>
 
@@ -173,8 +190,9 @@ footer{max-width:1180px;margin:0 auto;padding:24px 20px 48px;border-top:1px soli
     <div>
       <h2>Run the analysis on 67 years of data</h2>
       <p>Open the <a href="https://colab.research.google.com/github/isildakbora/fef3001-assignments/blob/main/a1/keeling_starter.ipynb">starter notebook</a>,
-      save a copy to your Drive, and upload your two files from Part A when the first cell asks for them. The next cell runs your
-      tests; all of them must pass, including yours. Then complete each TODO and answer in your own words:</p>
+      save a copy to your Drive, and upload your two files from Part A when the first cell asks for them. The next cell runs the
+      agent's tests; all of them must pass. Then write <b>one more test yourself</b>, by hand, in the cell made for it. After that,
+      complete each TODO and answer in your own words:</p>
       <dl class="q">
         <dt>Q1</dt><dd>Straight line or curve? Compare a linear and a quadratic trend and find the growth rate each implies for 1960 and 2025.</dd><dd class="p">10</dd>
         <dt>Q2</dt><dd>Compute the growth rate year by year, compare it with NOAA's published values, and explain two unusual years.</dd><dd class="p">10</dd>
@@ -224,7 +242,7 @@ footer{max-width:1180px;margin:0 auto;padding:24px 20px 48px;border-top:1px soli
     <div class="note">Grading</div>
     <div>
       <table>
-        <tr class="a"><td>Part A: a plan reviewed with a real comment, meaningful tests that pass (one of them yours), a module that follows SPEC.md</td><td>30</td></tr>
+        <tr class="a"><td>Part A: a plan reviewed with a real comment, tests that pass plus your own meaningful test in Colab, a module that follows SPEC.md</td><td>30</td></tr>
         <tr class="b"><td>Part B: correct numbers with units, readable figures, explanations in your own words</td><td>50</td></tr>
         <tr class="c"><td>Part C: a check against a primary source, a complete disclosure</td><td>20</td></tr>
       </table>

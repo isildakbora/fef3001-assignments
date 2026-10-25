@@ -43,7 +43,6 @@ Use **synthetic data with known answers** only — no network access in the test
 - `seasonal_cycle` recovers the peak-to-trough amplitude of a pure 12-month sine of amplitude 3 ppm (≈ 6 ppm);
 - `dominant_periods` returns 12.0 first for a 12-month sine.
 
-You must add **one more test yourself**, by hand, that the agent did not write.
-
-The tests run in the Colab notebook (Part B). If Python is installed on your computer, the agent can also run
-them for you in Antigravity; approve the command when it asks.
+These tests run in the Colab notebook (Part B). If Python is installed on your computer, the agent can also run
+them for you in Antigravity; approve the command when it asks. You will write one more test yourself, by hand,
+in the notebook.
