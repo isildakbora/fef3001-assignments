@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Assignment 1 · Keeling curve · FEF3001</title>
+<meta name="description" content="FEF3001 Assignment 1: build and test an analysis module with Google Antigravity, analyse NOAA Mauna Loa CO2 data in Google Colab.">
+<style>
+:root{--bg:#f6f5f1;--panel:#fff;--ink:#1c2233;--soft:#4b5366;--dust:#7d8496;--rule:#dcd8cc;--brand:#222b57;--gold:#a8884f;--warn:#b0503d;--ok:#3f7d5a;--code:#eef0f5;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#0f131d;--panel:#161c2a;--ink:#e8eaf0;--soft:#b4bacb;--dust:#8a91a3;--rule:#2b3245;--brand:#9fb0e8;--gold:#cdb482;--warn:#e08a74;--ok:#7cc19a;--code:#1d2435}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
+main{max-width:860px;margin:0 auto;padding:28px 16px 64px}
+a{color:var(--brand)}
+header .kicker{font:600 13px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:.3em 0 .4em;letter-spacing:-.01em}
+h2{font-size:22px;margin:2.2em 0 .6em;padding-top:.6em;border-top:1px solid var(--rule)}
+h3{font-size:17px;margin:1.4em 0 .4em}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--soft);font-size:15px;margin:0 0 18px}
+.meta b{color:var(--ink)}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 6px}
+.btn{display:inline-block;padding:10px 16px;border-radius:6px;text-decoration:none;font-weight:600;border:1px solid var(--rule);background:var(--panel);color:var(--ink)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--bg)}
+.btn[aria-disabled=true]{opacity:.55;pointer-events:none}
+.card{background:var(--panel);border:1px solid var(--rule);border-left:3px solid var(--gold);border-radius:6px;padding:14px 16px;margin:14px 0}
+.card.warn{border-left-color:var(--warn)} .card.ok{border-left-color:var(--ok)}
+code,kbd{font:14px var(--mono);background:var(--code);padding:1px 5px;border-radius:4px}
+pre{font:14px/1.5 var(--mono);background:var(--code);padding:12px 14px;border-radius:6px;overflow-x:auto;white-space:pre-wrap}
+ol li,ul li{margin:.3em 0}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:600;color:var(--soft)} td.pts{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.small{font-size:14px;color:var(--dust)}
+footer{margin-top:48px;font-size:14px;color:var(--dust)}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="kicker">FEF3001 · Introduction to Artificial Intelligence · Assignment 1</div>
+  <h1>Is the rise of CO₂ accelerating?</h1>
+  <div class="meta">
+    <span><b>Individual</b></span>
+    <span>Out: <b>Thu 5 Nov 2026</b></span>
+    <span>Due: <b>Thu 12 Nov 2026, 14:00</b> (Istanbul time)</span>
+    <span>100 points</span>
+  </div>
+  <p>You will analyse the longest direct record of atmospheric CO₂ — the Mauna Loa “Keeling curve”, 1959–2025 — with two
+  tools that you will use for the rest of your studies: <b>Google Antigravity</b>, where an AI agent writes code that
+  <em>you</em> review and test, and <b>Google Colab</b>, where you run the analysis in the cloud and share it.</p>
+  <div class="cta">
+    <a class="btn primary" id="submit" href="#submission" aria-disabled="true">Submit (form opens on 5 Nov)</a>
+    <a class="btn" href="https://colab.research.google.com/github/isildakbora/fef3001-assignments/blob/main/a1/keeling_starter.ipynb">Open the starter notebook in Colab</a>
+    <a class="btn" href="https://github.com/isildakbora/fef3001-assignments/blob/main/a1/SPEC.md">Module specification (SPEC.md)</a>
+  </div>
+</header>
+
+<h2>Before you start (≈ 20 min)</h2>
+<ol>
+  <li>A personal <b>Google account</b> (Colab, Antigravity and the submission form all use it).</li>
+  <li><b>Python 3.10 or newer</b> on your computer, with three packages:
+    <pre>python -m pip install numpy pandas pytest</pre></li>
+  <li><b>Google Antigravity</b>: download it from <a href="https://antigravity.google/download">antigravity.google/download</a>
+    (Windows, macOS, Linux) and sign in with your Google account. The free <i>Individuals</i> plan is enough; it has a
+    weekly limit on agent use, so <b>do not leave Part A for the last evening</b>.</li>
+</ol>
+<div class="card warn"><b>Stuck on installation?</b> Bring your laptop to class on 5 Nov — we will fix setup problems
+in the first 15 minutes. A setup problem reported after 10 Nov is not an excuse for a late submission.</div>
+
+<h2>Part A · Antigravity: an agent writes, you review (30 pts)</h2>
+<ol>
+  <li>Create an empty folder <code>fef3001-a1</code> and open it in Antigravity. Download
+    <a href="https://github.com/isildakbora/fef3001-assignments/blob/main/a1/SPEC.md">SPEC.md</a> into that folder.</li>
+  <li>In the agent settings, set the <b>review policy</b> so that the agent must <b>request review</b> before it acts.
+    You are the reviewer: nothing is written without your approval.</li>
+  <li>Ask the agent, in your own words, to implement <code>co2_analysis.py</code> and <code>test_co2_analysis.py</code>
+    exactly as specified in <code>SPEC.md</code>.</li>
+  <li>Read the agent's <b>implementation plan</b> before approving it. Leave <b>at least one substantive comment</b> on
+    the plan (a real question or correction — not “looks good”) and see how the agent responds.</li>
+  <li>Run the tests in the terminal: <code>python -m pytest -q</code>. All tests must pass.</li>
+  <li><b>Write one more test yourself</b>, by hand, that the agent did not write, and make it pass.</li>
+  <li>Keep, for the submission: a screenshot or PDF of the plan with your comment, the agent's walkthrough, and the
+    terminal showing the passing tests.</li>
+</ol>
+
+<h2>Part B · Colab: the analysis (50 pts)</h2>
+<p>Open the <a href="https://colab.research.google.com/github/isildakbora/fef3001-assignments/blob/main/a1/keeling_starter.ipynb">starter
+notebook</a>, choose <i>File → Save a copy in Drive</i>, and upload <b>your</b> <code>co2_analysis.py</code> when the first cell
+asks for it. Run everything, complete each <code>TODO</code> and answer in the <i>Your answer</i> cells:</p>
+<table>
+  <tr><th>Q1</th><td>Straight line or curve? Linear vs quadratic trend, RMS residuals, the implied growth rate in 1960 and 2025.</td><td class="pts">10</td></tr>
+  <tr><th>Q2</th><td>Growth rate year by year, compared with NOAA's published values; decade means; two unusual years and their cause.</td><td class="pts">10</td></tr>
+  <tr><th>Q3</th><td>The seasonal cycle in the 1960s and the 2010s: when, why, and has its amplitude changed?</td><td class="pts">10</td></tr>
+  <tr><th>Q4</th><td>Hidden periods in the residual spectrum — and which one is an artefact of your model.</td><td class="pts">10</td></tr>
+  <tr><th>Q5</th><td>From ppm to gigatonnes of carbon, derived by hand from the mass of the atmosphere.</td><td class="pts">10</td></tr>
+</table>
+<p>When you are done: <i>Share → General access → Anyone with the link → Viewer</i>, and copy the link.</p>
+
+<h2>Part C · Verify and disclose (20 pts)</h2>
+<ul>
+  <li><b>Verification (10):</b> ask an AI tool one numerical question from this assignment, paste its answer in the notebook,
+    and check it against your own result and a primary source (Week 3).</li>
+  <li><b>Disclosure (10):</b> the three-line AI-use statement at the end of the notebook — tool, purpose, human oversight (Week 4).</li>
+</ul>
+
+<h2 id="submission">Submission</h2>
+<p>One submission per student, through the form (button at the top; it opens on 5 Nov). You will need:</p>
+<ol>
+  <li>the link to your Colab notebook (viewer access);</li>
+  <li>your <code>co2_analysis.py</code> and <code>test_co2_analysis.py</code>;</li>
+  <li>the screenshots or PDFs from Part A (plan with your comment, walkthrough, passing tests).</li>
+</ol>
+<p class="small">The form asks you to sign in with Google so that files can be uploaded. You can edit your submission until the deadline.</p>
+
+<h2>Rules</h2>
+<div class="card ok"><b>AI use is expected — and must be visible.</b> This assignment sits in the <b>yellow zone</b> of the
+Week 4 traffic-light model: the agent may write the module, but every answer in the notebook is written by you, and every AI
+use is declared. Submitting text or numbers you have not checked yourself is a red-zone offence.</div>
+<ul>
+  <li>Individual work. Discussing ideas is fine; sharing code, notebooks or answers is not.</li>
+  <li>Your module must be the one you built in Part A — the notebook reveals which functions you uploaded.</li>
+  <li>Cite every source you use for an explanation (Q2, Q3), including web pages.</li>
+</ul>
+
+<h2>Grading</h2>
+<table>
+  <tr><th>Part</th><th>What earns the points</th><th class="pts">Pts</th></tr>
+  <tr><td>A</td><td>Plan reviewed with a substantive comment (10) · tests pass and are meaningful, incl. your own test (10) · module follows SPEC.md (10)</td><td class="pts">30</td></tr>
+  <tr><td>B</td><td>Q1–Q5: correct numbers with units, readable figures, explanations in your own words</td><td class="pts">50</td></tr>
+  <tr><td>C</td><td>Verification with a primary source (10) · complete disclosure statement (10)</td><td class="pts">20</td></tr>
+</table>
+
+<h2>Data</h2>
+<p class="small">Lan, X., Tans, P. and K.W. Thoning: <i>Trends in globally-averaged CO₂ determined from NOAA Global Monitoring Laboratory
+measurements</i>, <a href="https://gml.noaa.gov/ccgg/trends/">gml.noaa.gov/ccgg/trends</a>. Mauna Loa monthly means; data before
+May 1974 from C. D. Keeling, Scripps Institution of Oceanography. NOAA GML data are freely available; please cite them.</p>
+
+<footer>Prof. Dr. Bora Işıldak · Yıldız Technical University · <a href="../">all FEF3001 assignments</a></footer>
+</main>
+<script>
+// Submission link: set FORM to the Google Form URL; the button becomes active from the opening date.
+const FORM = '';
+const OPENS = new Date('2026-11-05T00:00:00+03:00');
+const b = document.getElementById('submit');
+if (FORM && new Date() >= OPENS) { b.href = FORM; b.removeAttribute('aria-disabled'); b.textContent = 'Submit your work'; }
+</script>
+</body>
+</html>
